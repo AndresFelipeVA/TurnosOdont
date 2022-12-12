@@ -28,9 +28,9 @@ public class TurnoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Turno createTurno(Turno Turno){
+    public Turno createTurno(Turno turno){
         //TODO: crear TurnoDTO para que no consulte la DB para obtener el paciente y dentista para crear el objeto Turno
-        return turnoService.create(Turno);
+        return turnoService.create(turno);
     }
 
     @DeleteMapping("/{id}")

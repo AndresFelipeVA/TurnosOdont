@@ -28,8 +28,8 @@ public class DentistController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Dentist createDentist(Dentist Dentist){
-        return dentistService.create(Dentist);
+    public Dentist createDentist(Dentist dentist){
+        return dentistService.create(dentist);
     }
 
     @DeleteMapping("/{matricula}")
