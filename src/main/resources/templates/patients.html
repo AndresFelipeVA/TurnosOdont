@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Lista de Pacientes Actuales</title>
+</head>
+<body>
+<div class="container">
+    <div th:insert="fragments/navbar.html"></div>
+
+    <div class="jumbotron">
+        <div class="alert alert-success" role="alert" th:if="${(param.added != null)}">
+            Se ingreso el nuevo paciente
+        </div>
+        <h3>Pacientes Registrados</h3>
+        <table class="table table-striped">
+
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">DNI</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Acción</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="item : ${patients}">
+                <td th:text="${item.DNI}"></td>
+                <td th:text="${item.nombre}"></td>
+                <td th:text="${item.apellido}"></td>
+                <td th:text="${item.domicilio}"></td>
+                <td class="col-1">
+                    <form action="#" th:action="@{'/patients/{DNI}'(DNI=${item.DNI})}" th:method="delete">
+                        <button type="submit" class="btn btn-danger">
+                            <img src="/images/delWhite.png"/>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>

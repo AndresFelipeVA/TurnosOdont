@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title>Crear nuevo Turno</title>
+</head>
+<body>
+<div class="container">
+  <div th:insert="fragments/navbar.html"></div>
+
+  <div class="jumbotron">
+    <div class="row">
+
+      <div class="col-sm-6">
+        <img src="/images/turno.png"/>
+      </div>
+
+      <div class="card" style="width: 28rem;">
+        <h1 class="card-header">
+          Crear Nuevo Turno
+        </h1>
+
+        <form modelAttribute="newTurno" method="post" class="card-body m-3">
+          <div class="row justify-content-between mb-2">
+            <label for="dentistList"> Odontólogo: </label>
+            <select class="col-8" id="dentistList" name="dentist">
+              <option value="0">Seleccione un Odontólogo</option>
+              <option th:each="dentist: ${dentists}" th:value="${dentist.id}" th:text="${dentist.fullName}"></option>
+            </select>
+          </div>
+          <div class="row justify-content-between mb-2">
+            <label for="dentistList"> Paciente: </label>
+            <select class="col-8" id="patientList" name="patient">
+              <option value="0">Seleccione un Paciente</option>
+              <option th:each="patient: ${patients}" th:value="${patient.id}" th:text="${patient.fullName}"></option>
+            </select>
+          </div>
+          <div class="row justify-content-between">
+            <label for="date"> Fecha y Hora: </label>
+            <input class="col-auto mb-2" type="datetime-local" id="date" name="fecha_Hora"/>
+          </div>
+          <input type="submit" class="btn btn-lg btn-block btn-primary mt-3" role="button" value="Ingresar"/>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
