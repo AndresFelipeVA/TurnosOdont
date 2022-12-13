@@ -16,11 +16,11 @@ public class Turno {
     @JsonManagedReference/*En conjunto con JsonBackReference en Dentist que cuando retorne el objeto como JSON obtenga los
     dentistas, pero en estos no llene los turnos*/
     @ManyToOne
-    @JoinColumn(name = "dentist_id")
+    @JoinColumn(name = "dentist_id", nullable = false)
     private Dentist dentist;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
