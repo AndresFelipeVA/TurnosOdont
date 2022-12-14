@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -27,13 +28,28 @@ public class TurnOdontSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/api/v1/patients").hasRole("ADMIN")//API Creación patient
                 .antMatchers("/api/v1/dentists/*").hasRole("ADMIN")//API Borrado o búsqueda 1 dentist
                 .antMatchers("/api/v1/patients/*").hasRole("ADMIN")//API Borrado o búsqueda 1 patient
+                .antMatchers("/images/**").permitAll() //Para poder acceder a las imágenes
                 .anyRequest().authenticated()
+
                 .and()
                 .formLogin()
+                .loginPage("/login")//El form tiene que incluir un token CSRF Token, Thymeleaf lo incluye automáticamente
+                .loginProcessingUrl("/login").permitAll()
+                .failureUrl("/login?error=si")
+                .defaultSuccessUrl("/", true)
+
                 .and()
                 //.cors().and()
-                .csrf().ignoringAntMatchers("/h2")//Habilitar acceso a la consola h2
-                .and().headers().frameOptions().sameOrigin();//Habilitar acceso a la consola h2, que usa marcos
+                .csrf().disable()//Para acceder desde Postman .ignoringAntMatchers("/h2")//Habilitar acceso a la consola h2
+                .headers().frameOptions().sameOrigin()//Habilitar acceso a la consola h2, que usa marcos
+
+                .and()
+                .logout()
+                .logoutSuccessUrl("/login?logout=si")//Puede ser cualquiera igual al no estar autentificado va a login
+                .logoutRequestMatcher(new AntPathRequestMatcher("/perform_logout", "GET"))
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID");
+                //.logoutUrl("logout")  //Esto lo reemplazamos con el AntPathRequestMatcher
     }
 
     @Override

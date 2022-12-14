@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+
+    <title>Clínica Odontológica Login</title>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron mt-5 row justify-content-center">
+
+        <div class="card" style="width: 28rem;">
+            <div class="card-header">
+                <div class="row">
+                    <h1 class="col">
+                        Login Clínica Odontológica
+                    </h1>
+                    <div class="col-sm-4">
+                        <img src="/images/appLocked.png" style="width:100%"/>
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${param.error}" class="alert alert-danger mx-3 mt-3 mb-0" role="alert">
+                Usuario y/o password incorrectos.
+            </div>
+
+            <form th:action="@{/login}" class="card-body m-3" method="post">
+                <div class="row justify-content-between">
+                    <label for="username"> Usuario: </label>
+                    <input class="col-auto mb-2" id="username" name="username" type="text"/>
+                </div>
+                <div class="row justify-content-between">
+                    <label for="password"> Password: </label>
+                    <input class="col-auto mb-2" id="password" name="password" type="password"/>
+                </div>
+                <input type="submit" class="btn btn-lg btn-block btn-primary mt-3" role="button" value="Login"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script crossorigin="anonymous"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>
