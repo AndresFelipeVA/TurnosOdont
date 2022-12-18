@@ -2,12 +2,15 @@ package com.andresFVA.turnosOdont.controller;
 
 import com.andresFVA.turnosOdont.controllers.DentistController;
 import com.andresFVA.turnosOdont.services.DentistService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -16,13 +19,25 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(DentistController.class)
+@ExtendWith(MockitoExtension.class)
 public class DentistRestControllerTests {
-    @Autowired
+    /* Cambiado para aislar controller sin cargar el WebApplicationContext de Spring y asi evitar la seguridad y
+    *  realmente hacer una prueba unitaria del REST controller
+    *  Implementando la estrategia 1 según:
+    *       https://thepracticaldeveloper.com/guide-spring-boot-controller-tests
+    * */
     private MockMvc mockMvc;
 
-    @MockBean
-    DentistService dentistService;
+    @Mock
+    private DentistService dentistService;
+
+    @InjectMocks
+    private DentistController dentistController;
+
+    @BeforeEach
+    public void setup(){
+        mockMvc = MockMvcBuilders.standaloneSetup(dentistController).build();
+    }
 
     @Test
     public void canGetAllDentistTest() throws Exception{//Perform puede lanzar una excepción
