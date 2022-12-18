@@ -37,10 +37,4 @@ public class DentistController {
         dentistService.deleteDentist(matricula);
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<String> handleEx(RuntimeException ex){
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
-    }
-
-
 }

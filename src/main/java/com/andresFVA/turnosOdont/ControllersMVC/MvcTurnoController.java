@@ -61,12 +61,6 @@ public class MvcTurnoController {
         return "redirect:/turnos";
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public String handleEx(Model model, RuntimeException ex){
-        model.addAttribute("error", "ERROR: "+ex.toString());
-        return "error";
-    }
-
     private List<Person> findDentist() {
         List<Person> dentistsAvailable = new ArrayList<>();
         dentistService.findAll().forEach(

@@ -38,10 +38,4 @@ public class TurnoController {
         turnoService.deleteTurno(id);
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<String> handleEx(RuntimeException ex){
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
-    }
-
-
 }

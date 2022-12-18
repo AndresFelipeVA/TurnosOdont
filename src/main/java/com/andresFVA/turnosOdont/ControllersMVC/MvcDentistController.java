@@ -48,9 +48,4 @@ public class MvcDentistController {
         return "redirect:/dentists";
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public String handleEx(Model model, RuntimeException ex){
-        model.addAttribute("error", "ERROR: "+ex.toString());
-        return "error";
-    }
 }

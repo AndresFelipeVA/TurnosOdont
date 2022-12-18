@@ -37,10 +37,4 @@ public class PatientController {
         patientService.deletePatient(dni);
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<String> handleEx(RuntimeException ex){
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
-    }
-
-
 }
