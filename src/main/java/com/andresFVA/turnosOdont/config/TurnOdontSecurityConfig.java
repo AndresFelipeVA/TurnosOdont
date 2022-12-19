@@ -44,6 +44,9 @@ public class TurnOdontSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().sameOrigin()//Habilitar acceso a la consola h2, que usa marcos
 
                 .and()
+                .httpBasic()//Basic Authentication para acceder desde una API REST
+
+                .and()
                 .logout()
                 .logoutSuccessUrl("/login?logout=si")//Puede ser cualquiera igual al no estar autentificado va a login
                 .logoutRequestMatcher(new AntPathRequestMatcher("/perform_logout", "GET"))
